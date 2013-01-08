@@ -6,9 +6,9 @@ url = https://github.com/opscode-cookbooks/apt
 path = cookbooks/build-essential
 url = https://github.com/opscode-cookbooks/build-essential
 
-[submodule "cookbooks/deployd"]
+[submodule "cookbooks/chef-deployd"]
 path = cookbooks/deployd
-url = https://github.com/adamkrone/deployd
+url = https://github.com/adamkrone/chef-deployd
 
 [submodule "cookbooks/mongodb"]
 path = cookbooks/mongodb
