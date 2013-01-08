@@ -1,0 +1,23 @@
+[submodule "cookbooks/apt"]
+path = cookbooks/apt
+url = https://github.com/opscode-cookbooks/apt
+
+[submodule "cookbooks/build-essential"]
+path = cookbooks/build-essential
+url = https://github.com/opscode-cookbooks/build-essential
+
+[submodule "cookbooks/deployd"]
+path = cookbooks/deployd
+url = https://github.com/adamkrone/deployd
+
+[submodule "cookbooks/mongodb"]
+path = cookbooks/mongodb
+url = https://github.com/edelight/chef-mongodb
+
+[submodule "cookbooks/nodejs"]
+path = cookbooks/nodejs
+url = https://github.com/hectcastro/chef-nodejs
+
+[submodule "cookbooks/wordpress"]
+path = cookbooks/wordpress
+url = https://github.com/opscode-cookbooks/wordpress
