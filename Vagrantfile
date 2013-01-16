@@ -1,6 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+chefserver = "http://chef.thirdwave.local:4000"
+home = File.expand_path("~")
+user = ENV["USER"]
+dir = File.basename(Dir.getwd)
+node = "#{user}-deployd-#{dir}"
+
 Vagrant::Config.run do |config|
 
   config.vm.box = "precise64"
@@ -9,15 +15,13 @@ Vagrant::Config.run do |config|
 
   config.vm.forward_port 80, 8080
 
-  config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "cookbooks"
+  config.vm.provision :chef_client do |chef|
 
-    chef.add_recipe "apt"
-    chef.add_recipe "build-essential"
-    chef.add_recipe "mongodb::10gen_repo"
-    chef.add_recipe "mongodb"
-    chef.add_recipe "nodejs"
-    chef.add_recipe "deployd"
+    chef.chef_server_url = chefserver
+    chef.validation_key_path = "#{home}/.chef/validation.pem"
+    chef.node_name = node
+    chef.environment = "vagrant"
+    chef.add_role "deployd"
 
   end
 
