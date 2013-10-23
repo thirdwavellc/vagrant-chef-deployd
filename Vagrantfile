@@ -1,28 +1,19 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-chefserver = "http://chef.thirdwave.local:4000"
-home = File.expand_path("~")
-user = ENV["USER"]
-dir = File.basename(Dir.getwd)
-node = "#{user}-deployd-#{dir}"
+Vagrant.configure("2") do |config|
 
-Vagrant::Config.run do |config|
+	config.omnibus.chef_version = :latest
+	config.berkshelf.enabled = true
 
-  config.vm.box = "precise64"
+  config.vm.box = "opscode-precise64-provisionerless"
 
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
 
-  config.vm.forward_port 80, 8080
+	config.vm.network :private_network, ip: "172.16.30.50"
 
-  config.vm.provision :chef_client do |chef|
-
-    chef.chef_server_url = chefserver
-    chef.validation_key_path = "#{home}/.chef/validation.pem"
-    chef.node_name = node
-    chef.environment = "vagrant"
-    chef.add_role "deployd"
-
-  end
+	config.vm.provision :chef_solo do |chef|
+		chef.add_recipe "deployd"
+	end
 
 end
